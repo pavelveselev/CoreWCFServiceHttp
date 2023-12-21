@@ -1,8 +1,4 @@
-﻿using CoreWCF;
-using System;
-using System.Runtime.Serialization;
-
-namespace CoreWCFServiceHttp
+﻿namespace CoreWCFServiceHttp
 {
     [ServiceContract]
     public interface IService
@@ -12,6 +8,9 @@ namespace CoreWCFServiceHttp
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
+
+        [OperationContract]
+        string GetMyIp();
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

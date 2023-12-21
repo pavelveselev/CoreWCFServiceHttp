@@ -1,4 +1,6 @@
-﻿namespace CoreWCFServiceHttp
+﻿using CoreWCF.Web;
+
+namespace CoreWCFServiceHttp
 {
     public class Service : IService
     {
@@ -19,6 +21,20 @@
                 composite.StringValue += "Suffix";
             }
             return composite;
+        }
+
+        public string GetMyIp()
+        {
+            var result = string.Empty;
+            if (WebOperationContext.Current.IncomingRequest.Headers.AllKeys.Contains("X-Real-IP"))
+            {
+                result = WebOperationContext.Current.IncomingRequest.Headers["X-Real-IP"];
+            }
+            else if (OperationContext.Current.IncomingMessageProperties.ContainsKey("CoreWCF.Channels.RemoteEndpointMessageProperty"))
+            {
+                result = (OperationContext.Current.IncomingMessageProperties["CoreWCF.Channels.RemoteEndpointMessageProperty"] as RemoteEndpointMessageProperty)?.Address;
+            }
+            return result ?? string.Empty;
         }
     }
 }
