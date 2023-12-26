@@ -1,4 +1,5 @@
-﻿using CoreWCF.Web;
+﻿using CoreWCF;
+using CoreWCF.Web;
 
 namespace CoreWCFServiceHttp
 {
@@ -35,6 +36,11 @@ namespace CoreWCFServiceHttp
                 result = (OperationContext.Current.IncomingMessageProperties["CoreWCF.Channels.RemoteEndpointMessageProperty"] as RemoteEndpointMessageProperty)?.Address;
             }
             return result ?? string.Empty;
+        }
+
+        public string GetServiceUrl()
+        {
+            return OperationContext.Current.IncomingMessageProperties.Via.ToString();
         }
     }
 }

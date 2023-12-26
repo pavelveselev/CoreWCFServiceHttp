@@ -11,6 +11,9 @@
 
         [OperationContract]
         string GetMyIp();
+
+        [OperationContract]
+        string GetServiceUrl();
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
@@ -33,5 +36,8 @@
             get { return stringValue; }
             set { stringValue = value; }
         }
+
+        [DataMember]
+        string SomeStr { get; set; } = "qwe";
     }
 }
